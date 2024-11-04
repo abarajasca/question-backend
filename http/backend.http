@@ -1,0 +1,30 @@
+GET http://localhost:4001
+
+### Auth Login
+POST http://localhost:4001/api/auth
+Content-Type: application/json
+
+{
+    "email": "newuser@hotmail.com",
+    "password": "123456"
+}
+
+### Auth Register
+POST http://localhost:4001/api/auth/new
+Content-Type: application/json
+
+{
+    "name": "anotheruser",
+    "email": "anotheruser@hotmail.com",
+    "password": "123456"
+}
+
+### Auth renew token
+GET http://localhost:4001/api/auth/renew
+Content-Type: application/json
+x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NzI5MTcwMWYzYmVmMmExMmE0NmQzNzEiLCJuYW1lIjoibmV3dXNlciIsImlhdCI6MTczMDc1MDAwMCwiZXhwIjoxNzMwNzU3MjAwfQ.wiT6oFSifho3tzaejqcrWJ2go59YmYHIt9BJvFzqySc
+
+{    
+    "email": "newuser@hotmail.com",
+    "password": "123456"
+}
