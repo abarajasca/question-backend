@@ -1,7 +1,10 @@
-GET http://localhost:4001
+#@server=https://question-be.onrender.com
+@server=http://localhost:4001
+
+GET {{ server }}
 
 ### Auth Login
-POST http://localhost:4001/api/auth
+POST {{server}}/api/auth
 Content-Type: application/json
 
 {
@@ -28,3 +31,15 @@ x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NzI5MTcwMWYzYmVmMmExMm
     "email": "newuser@hotmail.com",
     "password": "123456"
 }
+
+### LLM
+### Validate
+
+GET {{ server }}/api/llm/validate?param=1
+Content-Type: application/json
+
+### generateTest
+GET {{ server }}/api/llm/generateTest?llm=gemini&topic=Terraform
+
+### Free prompt to test LLM.
+GET {{ server }}/api/llm/testLLMResponse?prompt=What is CST timezone?
