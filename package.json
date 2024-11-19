@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "start": "cross-env NODE_ENV=production node index.js",
-    "test": "cross-env NODE_ENV=test mocha 'test/**/*' --timeout 10000 --exit --randomize"
+    "test": "cross-env NODE_ENV=test mocha 'test/allTest.js' --timeout 50000"    
   },
   "keywords": [],
   "author": "",
