@@ -25,7 +25,7 @@ Content-Type: application/json
 ### Auth renew token
 GET http://localhost:4001/api/auth/renew
 Content-Type: application/json
-x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NzI5MTcwMWYzYmVmMmExMmE0NmQzNzEiLCJuYW1lIjoibmV3dXNlciIsImlhdCI6MTczMDc1MDAwMCwiZXhwIjoxNzMwNzU3MjAwfQ.wiT6oFSifho3tzaejqcrWJ2go59YmYHIt9BJvFzqySc
+x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NzI5MTcwMWYzYmVmMmExMmE0NmQzNzEiLCJuYW1lIjoibmV3dXNlciIsImlhdCI6MTczMjAzNzIwNiwiZXhwIjoxNzMyMDQ0NDA2fQ.Z11IwJs9nPjjmYRapZNeToOUfjG305fVItBPnD9rofE
 
 {    
     "email": "newuser@hotmail.com",

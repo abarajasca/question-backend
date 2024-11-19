@@ -2,7 +2,13 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 
-dotenv.config();
+dotenv.config({
+  path: [`.env.${ process.env.NODE_ENV }`,'.env']
+});
+
+console.log( process.env.NODE_ENV )
+console.log( 'DB Logs: ' + process.env.ENABLE_DB_LOGS )
+
 import { dbConnection } from './database/config.js'
 import { logRequest } from './middlewares/logRequest.js'
 
@@ -25,7 +31,9 @@ app.use( express.static('public'));
 app.use( express.json() );
 
 // log requests.
-app.use( logRequest );
+if ( process.env.ENABLE_DB_LOGS === "true" ){  
+  app.use( logRequest );
+}
 
 //Routes
 app.use('/api/auth', authRouter);
@@ -33,6 +41,15 @@ app.use('/api/llm', llmRouter);
 
 
 // listen for requests.
-app.listen( process.env.PORT, ()=>{
+const server = app.listen( process.env.PORT, ()=>{
     console.log(`Server running in port ${process.env.PORT}`);
 });
+
+process.on('SIGTERM', () => {
+    server.close(() => {
+      console.log('Process terminated')
+    })
+})
+
+export default app;
+export { server }
