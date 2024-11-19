@@ -1,4 +1,4 @@
-const jsonParseTry = require("../helpers/jsonParseTry");
+import jsonParseTry from '../helpers/jsonParseTry.js'
 
 const buildTemplate = ( topic, questionNumber,level,language ) => {
     const template = [
@@ -45,4 +45,4 @@ const formatResult = ( result ) => {
     return dataResult;
 }
 
-module.exports = { buildTemplate, formatResult } ;
+export { buildTemplate, formatResult } 

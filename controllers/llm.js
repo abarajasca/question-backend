@@ -1,7 +1,7 @@
-const { request, response } = require('express');
-const { generateContent } = require('../llm/geminiProvider');
-const { buildTemplate, formatResult } = require('../llm/buildTemplate');
-const Test  = require('../models/Test');
+import { request, response } from 'express'
+import { generateContent } from '../llm/geminiProvider.js'
+import { buildTemplate, formatResult } from '../llm/buildTemplate.js'
+import Test from '../models/Test.js'
 
 const validateLLM = (req, res= response ) => {
 
@@ -121,6 +121,4 @@ const generateTest = async (req = request, res= response ) => {
 
 };
 
-
-
-module.exports = { validateLLM,generateTest , testLLMResponse };
+export { validateLLM,generateTest , testLLMResponse };

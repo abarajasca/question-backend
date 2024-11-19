@@ -1,9 +1,13 @@
-const express = require('express');
-require('dotenv').config();
-const cors = require('cors');
+import express from 'express'
+import dotenv from 'dotenv'
+import cors from 'cors'
 
-const { dbConnection } = require('./database/config');
-const logRequest = require('./middlewares/logRequest');
+dotenv.config();
+import { dbConnection } from './database/config.js'
+import { logRequest } from './middlewares/logRequest.js'
+
+import authRouter from './routes/auth.js'
+import llmRouter from './routes/llm.js'
 
 //start service
 const app = express();
@@ -24,8 +28,8 @@ app.use( express.json() );
 app.use( logRequest );
 
 //Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/llm',require('./routes/llm')); 
+app.use('/api/auth', authRouter);
+app.use('/api/llm', llmRouter); 
 
 
 // listen for requests.

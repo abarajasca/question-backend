@@ -1,10 +1,10 @@
-const { Router} = require('express');
+import { Router} from 'express'
 const router = Router();
-const { check } = require('express-validator');
+import  { check } from 'express-validator'
 
-const { createUser,loginUser,renewToken } = require('../controllers/auth');
-const { handleValidationResult } = require('../middlewares/handleValidationResult');
-const { validateJWT } = require('../middlewares/validateJWT');
+import { createUser,loginUser,renewToken } from '../controllers/auth.js'
+import { handleValidationResult } from '../middlewares/handleValidationResult.js'
+import { validateJWT }  from '../middlewares/validateJWT.js'
 
 router.post('/',
     [
@@ -27,4 +27,4 @@ router.get('/renew',
     ],
     renewToken );
 
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
-const dbConnection = async () => {
+export const dbConnection = async () => {
     try {
         await mongoose.connect( process.env.DB_CNN )
     } catch (error) {
@@ -11,6 +11,6 @@ const dbConnection = async () => {
     console.log('DB online');
 };
 
-module.exports = {
-    dbConnection
-}
+// module.exports = {
+//     dbConnection
+// }

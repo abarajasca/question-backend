@@ -1,11 +1,11 @@
 // route path: /api/llm
 
-const Router = require('express');
-const { validateLLM,generateTest, testLLMResponse } = require('../controllers/llm');
+import Router from 'express'
+import { validateLLM, generateTest, testLLMResponse } from '../controllers/llm.js'
 
 const router = Router();
 router.get("/validate",validateLLM);
 router.get("/generateTest",generateTest);
 router.get("/testLLMResponse",testLLMResponse);
 
-module.exports = router;
+export default router;

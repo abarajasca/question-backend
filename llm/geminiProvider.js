@@ -1,4 +1,4 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { GoogleGenerativeAI } from "@google/generative-ai"
 
 const getGeminiModel = () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -6,7 +6,7 @@ const getGeminiModel = () => {
     return model;
 };
 
-const generateContent = async ( prompt ) => {
+export const generateContent = async ( prompt ) => {
     try {
       const model = getGeminiModel();
       const result = await model.generateContent(prompt);
@@ -21,5 +21,3 @@ const generateContent = async ( prompt ) => {
       }  
     }    
 }
-
-module.exports = { generateContent }

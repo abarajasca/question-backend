@@ -1,6 +1,6 @@
-const { request, response } = require('express');
+import { request, response } from 'express'
 
-const logRequest = ( req = request,res = response,next ) => {
+export const logRequest = ( req = request,res = response,next ) => {
     console.log("------ logRequest -------");
     console.log(req.method + " " + req.protocol + "://" + req.hostname + req.url + " " + req.httpVersion);
     console.log(req.headers);
@@ -12,4 +12,4 @@ const logRequest = ( req = request,res = response,next ) => {
     next();
 };
 
-module.exports = logRequest;
+// module.exports = logRequest;

@@ -12,4 +12,4 @@ const jsonParseTry = ( jsonString ) => {
             : null ;
 };
 
-module.exports = jsonParseTry;
+export default jsonParseTry;
