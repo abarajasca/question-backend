@@ -1,6 +1,6 @@
 import * as chai from 'chai'
 import { default as chaiHttp } from "chai-http";
-import { after, describe } from 'mocha';
+import { describe } from 'mocha';
 import { expect } from 'chai'
 import { request } from 'chai-http';
 
