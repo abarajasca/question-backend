@@ -1,6 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import swaggerUi  from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerOptions from './swagger/swagger.conf.js';
+
 
 dotenv.config({
   path: [`.env.${ process.env.NODE_ENV }`,'.env']
@@ -29,6 +33,10 @@ app.use( express.static('public'));
 
 // Parse json body
 app.use( express.json() );
+
+// Swagger
+const specs = swaggerJSDoc(swaggerOptions );
+app.use( '/api-docs', swaggerUi.serve,swaggerUi.setup( specs ));
 
 // log requests.
 if ( process.env.ENABLE_DB_LOGS === "true" ){  

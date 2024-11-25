@@ -42,4 +42,15 @@ Content-Type: application/json
 GET {{ server }}/api/llm/generateTest?llm=gemini&topic=Terraform
 
 ### Free prompt to test LLM.
-GET {{ server }}/api/llm/testLLMResponse?prompt=What is CST timezone?
+GET {{ server }}/api/llm/openPrompt?prompt=What is CST timezone?
+
+### Skills Match
+POST {{ server }}/api/llm/skillsMatch
+Content-Type: application/json
+
+{
+    "resume": "Senior developer with lot of experience in Javascript and React.",
+    "skills": [
+        "Javascript","React","Angular"
+    ]
+}

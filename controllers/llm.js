@@ -2,6 +2,9 @@ import { request, response } from 'express'
 import { generateContent } from '../llm/geminiProvider.js'
 import { buildTemplate, formatResult } from '../llm/buildTemplate.js'
 import Test from '../models/Test.js'
+import { buildSkillsMatchTemplate } from '../llm/skillsMatchTemplate.js';
+import { skills_match } from '../http/skills_match.js';
+
 
 const validateLLM = (req, res= response ) => {
 
@@ -13,7 +16,7 @@ const validateLLM = (req, res= response ) => {
 };
 
 
-const testLLMResponse = async (req, res= response ) => {
+const openPrompt = async (req, res= response ) => {
 
     const { prompt } = req.query;
 
@@ -121,4 +124,62 @@ const generateTest = async (req = request, res= response ) => {
 
 };
 
-export { validateLLM,generateTest , testLLMResponse };
+
+const skillsMatch = async (req = request, res = response) => {
+    const { resume, skills } = req.body
+
+    // Validate
+    if (!(resume && skills) || ( resume === "" || skills.length == 0)){
+        return res.status(400).json( {
+            ok: false,
+            msg: "Missing parameters"
+        });
+    }
+
+    const startTime = new Date().getTime();
+    let result = {}
+
+    // // Purpose testing.
+    // return res.status(200).json( skills_match )
+
+    try {
+        // Prepare template and call service        
+        const prompt = buildSkillsMatchTemplate(resume,skills);
+
+        result = await generateContent( prompt );        
+        
+        if (!result.ok) {
+            console.log({result})
+            throw new Error( result.message )
+        }
+    
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: 'Llm service not available.'
+        });
+
+    }
+    
+    try {
+        // Verify results
+        const dataResult = formatResult(result.text);
+        const endTime = new Date().getTime();
+        const runningTime =new Date(endTime-startTime).getMilliseconds();    
+
+        // output results
+        return res.status(200).json({
+            ok: true,
+            runningTime,
+            skills: dataResult.skills
+        })
+        
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: error.message
+        });
+    }
+}
+
+export { validateLLM,generateTest , openPrompt, skillsMatch };
