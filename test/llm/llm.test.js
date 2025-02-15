@@ -59,18 +59,45 @@ export const describeLmm = () => {
             });
         });
 
-        describe('/testLLMResponse', () => {
+        describe('/openPrompt', () => {
 
             it("should get a free prompt from llm service", (done) => {
 
                 request.execute(app)
-                    .get('/api/llm/testLLMResponse?prompt=What is CST timezone?')
+                    .get('/api/llm/openPrompt?prompt=What is CST timezone?')
                     .type("application/json")
-                    .end((err, res) => {
+                    .end((err, res) => {                        
                         expect(res).to.have.status(200);
                         expect(res.body).to.be.an('object');
                         expect(res.body).to.have.property("ok").equal(true)
                         expect(res.body).to.have.property("result").to.have.property("ok").equal(true)
+                        expect(res.body).to.have.property("runningTime")
+                        done();
+                    });
+            });
+        });
+
+        describe('/skillsMatch', () => {
+
+            it("should get a skills match result from llm service", (done) => {
+
+                request.execute(app)
+                    .post('/api/llm/skillsMatch')
+                    .type("application/json")
+                    .send(
+                        {
+                            "resume": "Senior developer with lot of experience in Javascript and React.",
+                            "skills": [
+                                "Javascript","React","Angular"
+                            ]
+                        }
+                    )
+                    .end((err, res) => {                        
+                        console.log(res.body);
+                        expect(res).to.have.status(200);
+                        expect(res.body).to.be.an('object');
+                        expect(res.body).to.have.property("ok").equal(true)
+                        expect(res.body).to.have.property("skills").with.length.greaterThan(1)
                         expect(res.body).to.have.property("runningTime")
                         done();
                     });
